@@ -38,8 +38,13 @@ class ProjectController extends Controller
                     ->paginate(10)
             ),
             'activities' => ActivityResource::collection(
-                Activity::authorized($request->user())
-                    ->has('subject')
+                // Todo
+                //Activity::authorized($request->user())
+                //    ->has('subject')
+                //    ->orderByDesc('created_at')
+                //    ->limit(5)
+                //    ->get()
+                Activity::has('subject')
                     ->orderByDesc('created_at')
                     ->limit(5)
                     ->get()
@@ -76,7 +81,7 @@ class ProjectController extends Controller
             ),
             'activities' => ActivityResource::collection(
                 Activity::whereProjectId($project->id)
-                    ->authorized($request->user())
+                    //->authorized($request->user()) // Todo
                     ->has('subject')
                     ->orderByDesc('created_at')
                     ->limit(5)
