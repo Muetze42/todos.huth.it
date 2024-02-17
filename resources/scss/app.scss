@@ -1,0 +1,94 @@
+@tailwind base;
+
+a {
+  @apply text-indigo-300 hover:text-purple-300;
+
+  //&[href^="https"], &[href^="/"] {
+  //  @apply after:content-['_↗'];
+  //}
+}
+
+input, select, option, textarea {
+  @apply placeholder:italic placeholder:font-light placeholder:font-mono;
+}
+
+@tailwind components;
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center select-none;
+    @apply font-medium rounded-sm leading-normal transition duration-150 ease-in-out;
+    @apply px-2.5 py-1;
+    @apply bg-indigo-700 shadow-lg;
+    @apply text-white;
+
+    &:is(a, button, input) {
+      @apply hover:bg-indigo-600;
+    }
+  }
+  .btn-disabled {
+    @apply font-normal;
+    @apply text-gray-300/80 bg-gray-800;
+    &:is(a, button, input) {
+      @apply hover:bg-gray-800;
+    }
+  }
+  .btn-danger {
+    @apply bg-red-800;
+    &:is(a, button, input) {
+      @apply hover:bg-red-700;
+    }
+  }
+  .btn-sm {
+    @apply px-1.5 text-sm;
+  }
+  .nav-section {
+    @apply bg-slate-900 border-slate-800 py-2;
+  }
+  .form-checkbox {
+    @apply rounded-sm text-green-500 mb-0.5 mr-2;
+  }
+  .form-input, .form-select, textarea {
+    @apply text-neutral-900 rounded-sm;
+  }
+  .status {
+    @apply inline-flex items-center justify-center select-none;
+    @apply h-6 w-6;
+    @apply border rounded-sm border-gray-700 p-4;
+  }
+}
+
+@tailwind utilities;
+
+@import "fonts/inter-var";
+@import "fonts/fira-code";
+
+.pagination {
+  @apply divide-x divide-gray-300/25 container flex gap-y-1.5 flex-wrap justify-center items-center;
+  .btn {
+    @apply rounded-none first:sm:rounded-l last:sm:rounded-r;
+  }
+}
+
+.scrollbar, .scrollbar-thin {
+  @apply scrollbar-thumb-gray-500 scrollbar-track-gray-800 scrollbar-track-rounded-full;
+}
+
+#app {
+  @apply flex flex-col min-h-screen;
+}
+
+nav, .nav {
+  a {
+    @apply text-neutral-400 hover:text-neutral-200;
+  }
+}
+
+.checkbox {
+  @apply cursor-pointer;
+  @apply transition-all duration-150 text-gray-300;
+
+  span {
+    @apply hover:text-white;
+  }
+}

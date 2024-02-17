@@ -1,0 +1,22 @@
+{
+    "0": {
+        "icon": "wrench",
+        "label": "in progress"
+    },
+    "1": {
+        "icon": "pause",
+        "label": "paused"
+    },
+    "2": {
+        "icon": "tag",
+        "label": "open"
+    },
+    "3": {
+        "icon": "ban",
+        "label": "cancelled"
+    },
+    "4": {
+        "icon": "check",
+        "label": "completed"
+    }
+}
