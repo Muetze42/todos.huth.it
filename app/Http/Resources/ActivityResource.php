@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Project;
+use App\Models\Reference;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -41,6 +42,9 @@ class ActivityResource extends JsonResource
         if ($this->subject instanceof Project) {
             return $this->subject;
         }
+        if ($this->subject instanceof Reference) {
+            return $this->subject->task->project;
+        }
 
         return $this->subject->project;
     }
@@ -58,6 +62,14 @@ class ActivityResource extends JsonResource
         if ($this->subject instanceof Task) {
             return sprintf(
                 ' %s a Task for „%s“',
+                $this->description,
+                $project->name
+            );
+        }
+
+        if ($this->subject instanceof Reference) {
+            return sprintf(
+                ' %s a Reference to „%s“',
                 $this->description,
                 $project->name
             );
