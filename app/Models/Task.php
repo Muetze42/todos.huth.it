@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Contracts\Models\HasVisibilityTrait;
 use App\Contracts\Models\LogsActivitiesTrait;
-use App\Contracts\Models\StatusEnum;
-use App\Contracts\Models\VisibilityEnum;
+use App\Contracts\StatusEnum;
+use App\Contracts\VisibilityEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

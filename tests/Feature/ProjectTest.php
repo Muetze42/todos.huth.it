@@ -4,7 +4,7 @@
 
 namespace Tests\Feature;
 
-use App\Contracts\Models\VisibilityEnum;
+use App\Contracts\VisibilityEnum;
 use App\Models\Project;
 use App\Models\User;
 use Tests\TestCase;

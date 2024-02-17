@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Models\StatusEnum;
+use App\Contracts\StatusEnum;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Http\Request;

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Contracts\Models\StatusEnum;
-use App\Contracts\Models\VisibilityEnum;
+use App\Contracts\StatusEnum;
+use App\Contracts\VisibilityEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

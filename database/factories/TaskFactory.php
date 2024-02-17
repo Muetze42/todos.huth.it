@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Contracts\Models\StatusEnum;
-use App\Contracts\Models\VisibilityEnum;
+use App\Contracts\StatusEnum;
+use App\Contracts\VisibilityEnum;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Contracts\Models\VisibilityEnum;
-use Illuminate\Database\Eloquent\Builder;
+use App\Contracts\FindProjectTrait;
+use App\Contracts\Models\HasVisibilityTrait;
+use App\Contracts\VisibilityEnum;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Models\Activity as Model;
@@ -11,6 +12,8 @@ use Spatie\Activitylog\Models\Activity as Model;
 class Activity extends Model
 {
     use SoftDeletes;
+    use HasVisibilityTrait;
+    use FindProjectTrait;
 
     /**
      * The name of the "updated at" column.
@@ -45,13 +48,9 @@ class Activity extends Model
     public static function booted(): void
     {
         static::creating(function (self $activity) {
-            $subject = $activity->subject;
-            $activity->project_id = match (true) {
-                $subject instanceof Project => $subject->getKey(),
-                $subject instanceof Task => $subject->project_id,
-                default => null
-            };
-            $activity->visibility = self::getVisibility($activity);
+            $project = static::findProject($activity);
+            $activity->project_id = $project->id;
+            $activity->visibility = $project->visibility;
         });
         static::created(function (self $activity) {
             if ($activity->description == 'updated' && $activity->subject instanceof Project) {
@@ -69,31 +68,5 @@ class Activity extends Model
                     ->update(['is_trashed' => $activity->description == 'restored']);
             }
         });
-    }
-
-    public static function getVisibility(self $activity)
-    {
-        $subject = $activity->subject;
-
-        return match (true) {
-            $subject instanceof Project => $subject->visibility,
-            default => VisibilityEnum::ADMIN
-        };
-    }
-
-    /**
-     * Scope a query to only include popular users.
-     */
-    public function scopeAuthorized(Builder $query, ?User $user): void
-    {
-        if (!$user) {
-            $query->where('visibility', VisibilityEnum::USER->value)
-                ->where('is_trashed', false);
-        } elseif (!$user->is_admin) {
-            $query->where('visibility', '<', VisibilityEnum::ADMIN->value)
-                ->where('is_trashed', false);
-        } else {
-            $query->where('is_trashed', false);
-        }
     }
 }

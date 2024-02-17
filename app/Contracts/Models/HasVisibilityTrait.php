@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Models;
 
+use App\Contracts\VisibilityEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 

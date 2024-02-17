@@ -10,7 +10,6 @@ use App\Http\Resources\TaskResource;
 use App\Models\Activity;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -38,13 +37,8 @@ class ProjectController extends Controller
                     ->paginate(10)
             ),
             'activities' => ActivityResource::collection(
-                // Todo
-                //Activity::authorized($request->user())
-                //    ->has('subject')
-                //    ->orderByDesc('created_at')
-                //    ->limit(5)
-                //    ->get()
-                Activity::has('subject')
+                Activity::authorized($request->user())
+                    ->has('subject')
                     ->orderByDesc('created_at')
                     ->limit(5)
                     ->get()
@@ -81,7 +75,7 @@ class ProjectController extends Controller
             ),
             'activities' => ActivityResource::collection(
                 Activity::whereProjectId($project->id)
-                    //->authorized($request->user()) // Todo
+                    ->authorized($request->user())
                     ->has('subject')
                     ->orderByDesc('created_at')
                     ->limit(5)
