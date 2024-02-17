@@ -34,6 +34,13 @@ class Project extends Model implements Sortable
         'visibility',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     */
+    protected $hidden = [
+        'order_column',
+    ];
+
     protected $guarded = [];
 
     /**

@@ -34,6 +34,13 @@ class Task extends Model implements Sortable
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     */
+    protected $hidden = [
+        'order_column',
+    ];
+
+    /**
      * The attributes that should be cast.
      */
     protected $casts = [
