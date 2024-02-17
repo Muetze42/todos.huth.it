@@ -106,12 +106,42 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Reference
+ *
+ * @property int $id
+ * @property int $task_id
+ * @property string $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\Task $task
+ * @method static \Database\Factories\ReferenceFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reference withoutTrashed()
+ */
+	class Reference extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Task
  *
  * @property int $id
  * @property string $project_id
  * @property string $name
- * @property string $description
+ * @property string|null $description
  * @property \App\Contracts\Models\VisibilityEnum $visibility
  * @property int $order_column
  * @property \App\Contracts\Models\StatusEnum $status
@@ -121,7 +151,10 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Reference> $references
+ * @property-read int|null $references_count
  * @method static \Illuminate\Database\Eloquent\Builder|Task authorized(?\App\Models\User $user)
+ * @method static \Database\Factories\TaskFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Task newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Task onlyTrashed()

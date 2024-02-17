@@ -15,9 +15,15 @@ function move(task, method) {
   )
 }
 
-function destryoTask(task) {
+function destroyTask(task) {
   if (confirm('Delete this task?') == true) {
     router.delete('tasks/' + task.id)
+  }
+}
+
+function destroyReference(reference) {
+  if (confirm('Delete this reference?') == true) {
+    router.delete('references/' + reference)
   }
 }
 
@@ -26,6 +32,10 @@ const form = useForm({
   description: null,
   status: 2,
   visibility: 0
+})
+
+const referenceForm = useForm({
+  url: null
 })
 
 defineProps({
@@ -95,7 +105,7 @@ const taskToEdit = ref(null)
                 v-if="user && user.is_admin && taskToEdit === null"
                 class="status flex gap-1.5 justify-center"
                 title="Delete task"
-                @click="destryoTask(task)"
+                @click="destroyTask(task)"
               >
                 <font-awesome-icon :icon="['far', 'ban']" />
               </button>
@@ -103,6 +113,48 @@ const taskToEdit = ref(null)
             <div v-if="taskToEdit !== task.id" class="grow">
               <div class="font-bold">{{ task.name }}</div>
               <p v-if="task.description">{{ task.description }}></p>
+              <div
+                v-if="task.references || (user && user.is_admin)"
+                class="px-1 mt-1 border border-slate-700"
+              >
+                <div class="font-medium underline">&nbsp;References&nbsp;</div>
+                <ul class="flex flex-col gap-1">
+                  <li
+                    v-for="(reference, referenceId) in task.references"
+                    :key="referenceId"
+                    class="flex gap-1"
+                  >
+                    <button class="btn" @click="destroyReference(referenceId)">
+                      <font-awesome-icon :icon="['far', 'ban']" />
+                    </button>
+                    <a :href="reference" target="_blank">{{ reference }}</a>
+                  </li>
+                </ul>
+                <form
+                  v-if="user && user.is_admin"
+                  class="flex gap-2 mt-1"
+                  @submit.prevent="
+                    referenceForm.post('/references/' + task.id, {
+                      onSuccess: () => {
+                        form.reset()
+                      }
+                    })
+                  "
+                >
+                  <input v-model="referenceForm.url" type="text" class="form-input py-1" required />
+                  <div v-if="referenceForm.errors.url" class="bg-red-600 text-red-50 px-1 font-semibold">
+                    {{ referenceForm.errors.url }}
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn"
+                    :disabled="!referenceForm.url"
+                    :class="{ 'btn-disabled': !referenceForm.url }"
+                  >
+                    Add Reference
+                  </button>
+                </form>
+              </div>
             </div>
             <form
               v-else
@@ -160,7 +212,9 @@ const taskToEdit = ref(null)
         class="p-2 flex flex-col gap-2"
         @submit.prevent="
           form.post('/tasks/' + project.id, {
-            onSuccess: () => form.reset()
+            onSuccess: () => {
+              form.reset()
+            }
           })
         "
       >

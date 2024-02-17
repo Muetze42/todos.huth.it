@@ -1,3 +1,3 @@
 # Todo List App
 
-My personal Laravel Todo List App for public Todos.
+My personal "To-Do List App" for public To-Do’s.

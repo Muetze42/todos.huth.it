@@ -6,6 +6,7 @@ use App\Contracts\Controllers\MovableTrait;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\TaskResource;
 use App\Models\Activity;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class ProjectController extends Controller
 
         return Inertia::render('Project/Show', [
             'project' => new ProjectResource($project),
-            'tasks' => JsonResource::collection(
+            'tasks' => TaskResource::collection(
                 $tasks->authorized($request->user())
                     ->ordered()
                     ->orderBy('status')

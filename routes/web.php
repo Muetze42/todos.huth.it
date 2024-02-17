@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::prefix('auth')->name('auth.')->group(function () {
 Route::apiResource('tasks', TaskController::class)->except(['index', 'show', 'store']);
 Route::post('tasks/{project}', [TaskController::class, 'store'])->name('tasks.store');
 Route::post('tasks/{task}/order', [TaskController::class, 'move'])->name('tasks.move');
+
+Route::post('references/{task}', [ReferenceController::class, 'store'])->name('references.store');
+Route::delete('references/{reference}', [ReferenceController::class, 'destroy'])->name('references.destroy');
 
 Route::post('status/{id}', StatusController::class)->name('status.update');
 
