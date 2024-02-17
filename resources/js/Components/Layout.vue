@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
     <div class="container">
       <nav class="flex justify-between items-center">
         <div class="inline-flex flex-wrap gap-2 items-center">
-          Todo List
+          To-Do List
           <font-awesome-icon :icon="['far', 'angles-right']" fixed-width size="sm" />
           <Link href="/">
             <h1>Projects</h1>
@@ -114,7 +114,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
   <footer class="nav-section border-t">
     <div class="container flex max-sm:flex-col gap-0.5 justify-center sm:justify-between">
       <div class="max-sm:text-center">
-        Todo List <font-awesome-icon :icon="['fad', 'code']" class="mr-1" /> 2024 by
+        To-Do List <font-awesome-icon :icon="['fad', 'code']" class="mr-1" /> 2024 by
         <a href="https://huth.it" target="_blank">Norman Huth</a>
       </div>
       <div class="max-sm:text-center">
