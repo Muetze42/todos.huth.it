@@ -112,7 +112,7 @@ const taskToEdit = ref(null)
             </div>
             <div v-if="taskToEdit !== task.id" class="grow">
               <div class="font-bold">{{ task.name }}</div>
-              <p v-if="task.description">{{ task.description }}></p>
+              <p v-if="task.description">{{ task.description }}</p>
               <div
                 v-if="task.references || (user && user.is_admin)"
                 class="px-1 mt-1 border border-slate-700"
